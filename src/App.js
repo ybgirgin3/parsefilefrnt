@@ -1,7 +1,9 @@
 import './App.css';
 import React, { useState } from 'react';
-import axios from 'axios';
+import FileUploadForm from './Components/FileUpload';
 
-function App() {}
+function App() {
+  <FileUploadForm />
+}
 
 export default App;
