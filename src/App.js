@@ -3,9 +3,10 @@ import React from 'react';
 import FileUpload from './Components/FileUpload';
 
 function App() {
+  const fileUploadForm = <FileUpload />;
   return (
     <div className="App">
-      <FileUpload />
+      <div>{fileUploadForm}</div>
     </div>
   );
 }

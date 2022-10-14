@@ -17,16 +17,17 @@ class FileUpload extends React.Component {
   }
 
   submit() {
-    const data = new FormData();
-    data.append('file', this.state.selectedFile);
+    const form = new FormData();
+    form.append('file', this.state.selectedFile);
     console.warn(this.state.selectedFile);
     let url = 'https://parsefileapi.herokuapp.com/uploadfile/';
 
     axios
-      .post(url, data)
+      .post(url, form)
       .then((res) => {
-        this.setState({ extractData: res.data });
-        console.log(this.state.extractData);
+        console.warn(res.data);
+        return res;
+        // this.setState({ extractData: res.data });
       })
       .catch((err) => console.error(err));
   }
