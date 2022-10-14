@@ -1,9 +1,13 @@
 import './App.css';
-import React, { useState } from 'react';
-import FileUploadForm from './Components/FileUpload';
+import React from 'react';
+import FileUpload from './Components/FileUpload';
 
 function App() {
-  <FileUploadForm />
+  return (
+    <div className="App">
+      <FileUpload />
+    </div>
+  );
 }
 
 export default App;
