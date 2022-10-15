@@ -5,6 +5,7 @@ import axios from 'axios';
 const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState();
   const [postReqRes, setPostReqRes] = useState('');
+  const [isresp200, setIsresp200] = useState(true);
   const [isFilePicked, setIsFilePicked] = useState(false);
   const [isFilePosted, setIsFilePosted] = useState(false);
 
@@ -17,6 +18,7 @@ const FileUpload = () => {
   };
 
   const handleSubmission = () => {
+    setIsresp200(false);
     const form = new FormData();
 
     form.append('file', selectedFile);
@@ -25,6 +27,7 @@ const FileUpload = () => {
       .post(main_url, form)
       .then((res) => {
         console.warn(res.data);
+        setIsresp200(true);
         setPostReqRes(res.data);
         setIsFilePosted(true);
       })
@@ -74,11 +77,19 @@ const FileUpload = () => {
           <p></p>
         )}
         <div>
-          <button
-            className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-            onClick={handleSubmission}>
-            Submit
-          </button>
+          {isresp200 ? (
+            <button
+              className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+              onClick={handleSubmission}>
+              Parse
+            </button>
+          ) : (
+            <button
+              className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+              onClick={handleSubmission}>
+              Processing, Please wait..
+            </button>
+          )}
         </div>
       </div>
       <br></br>
