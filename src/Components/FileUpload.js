@@ -1,83 +1,98 @@
-import React from 'react';
+import React, { useState } from 'react';
+import DataPreview from './DataPreview';
 import axios from 'axios';
 
-class FileUpload extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      selectedFile: '',
-      isFilePicked: false,
-      extractData: [],
-    };
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
+const FileUpload = () => {
+  const [selectedFile, setSelectedFile] = useState();
+  const [postReqRes, setPostReqRes] = useState('');
+  const [isFilePicked, setIsFilePicked] = useState(false);
+  const [isFilePosted, setIsFilePosted] = useState(false);
 
-  handleInputChange(event) {
-    this.setState({
-      selectedFile: event.target.files[0],
-      isFilePicked: !this.isFilePicked,
-    });
-  }
+  // url of main file uploading
+  let main_url = 'https://parsefileapi.herokuapp.com/uploadfile/';
 
-  submit() {
+  const changeHandler = (event) => {
+    setSelectedFile(event.target.files[0]);
+    setIsFilePicked(true);
+  };
+
+  const handleSubmission = () => {
     const form = new FormData();
-    form.append('file', this.state.selectedFile);
-    console.warn(this.state.selectedFile);
-    let url = 'https://parsefileapi.herokuapp.com/uploadfile/';
+
+    form.append('file', selectedFile);
 
     axios
-      .post(url, form)
+      .post(main_url, form)
       .then((res) => {
         console.warn(res.data);
-        this.setState({ extractData: res.data });
+        setPostReqRes(res.data);
+        setIsFilePosted(true);
       })
-      .catch((err) => console.error(err));
-  }
-  render() {
-    return (
-      <div>
-        <div className="row">
-          <div className="col-md-6 offset-md-3">
-            <br />
-            <br />
+      .catch((err) => console.warn(err));
+  };
 
-            <h3 className="text-white">ParseFileAPI</h3>
-            <br />
-            <div className="form-row">
-              <div className="form-group col-md-6">
-                <input
-                  type="file"
-                  className="form-control"
-                  name="upload_file"
-                  onChange={this.handleInputChange}
-                />
-                {this.isFilePicked ? (
-                  <div>
-                    <p>Filename: {this.selectedFile.name}</p>
-                    <p>Filetype: {this.selectedFile.type}</p>
-                    <p>Size in bytes: {this.selectedFile.size}</p>
-                    <p>
-                      lastModifiedDate:{' '}
-                      {this.selectedFile.lastModifiedDate.toLocaleDateString()}
-                    </p>
-                  </div>
-                ) : (
-                  <p>Select a file to show details</p>
-                )}
-                <button
-                  type="submit"
-                  className="btn btn-dark"
-                  onClick={() => this.submit()}>
-                  Send
-                </button>
-              </div>
-            </div>
+  return (
+    <div className="grid h-screen place-items-center ">
+      <div className="mb-3 w-96">
+        <label
+          for="formFile"
+          className="form-label inline-block mb-2 text-gray-700">
+          Default file input example
+        </label>
+        <input
+          className="form-control
+                    block
+                    w-full
+                    px-3
+                    py-1.5
+                    text-base
+                    font-normal
+                    text-gray-700
+                    bg-white bg-clip-padding
+                    border border-solid border-gray-300
+                    rounded
+                    transition
+                    ease-in-out
+                    m-0
+                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          type="file"
+          name="file"
+          id="formFile"
+          onChange={changeHandler}
+        />
+        {isFilePicked ? (
+          <div>
+            <p>Filename: {selectedFile.name}</p>
+            <p>Filetype: {selectedFile.type}</p>
+            <p>Size in bytes: {selectedFile.size}</p>
+            <p>
+              lastModifiedDate:{' '}
+              {selectedFile.lastModifiedDate.toLocaleDateString()}
+            </p>
           </div>
+        ) : (
+          <p></p>
+        )}
+        <div>
+          <button
+            className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+            onClick={handleSubmission}>
+            Submit
+          </button>
         </div>
-        <div className="row">{this.extractData}</div>
       </div>
-    );
-  }
-}
+      <br></br>
+      <div className="mb-3 w-96">
+        {isFilePosted ? (
+          <div className="mb-3 w-96">
+            <DataPreview response={postReqRes} />
+          </div>
+        ) : (
+          <div></div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default FileUpload;
