@@ -6,13 +6,16 @@ class FileUpload extends React.Component {
     super();
     this.state = {
       selectedFile: '',
+      isFilePicked: false,
       extractData: [],
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
+
   handleInputChange(event) {
     this.setState({
       selectedFile: event.target.files[0],
+      isFilePicked: !this.isFilePicked,
     });
   }
 
@@ -26,8 +29,7 @@ class FileUpload extends React.Component {
       .post(url, form)
       .then((res) => {
         console.warn(res.data);
-        return res;
-        // this.setState({ extractData: res.data });
+        this.setState({ extractData: res.data });
       })
       .catch((err) => console.error(err));
   }
@@ -49,6 +51,19 @@ class FileUpload extends React.Component {
                   name="upload_file"
                   onChange={this.handleInputChange}
                 />
+                {this.isFilePicked ? (
+                  <div>
+                    <p>Filename: {this.selectedFile.name}</p>
+                    <p>Filetype: {this.selectedFile.type}</p>
+                    <p>Size in bytes: {this.selectedFile.size}</p>
+                    <p>
+                      lastModifiedDate:{' '}
+                      {this.selectedFile.lastModifiedDate.toLocaleDateString()}
+                    </p>
+                  </div>
+                ) : (
+                  <p>Select a file to show details</p>
+                )}
                 <button
                   type="submit"
                   className="btn btn-dark"
@@ -59,6 +74,7 @@ class FileUpload extends React.Component {
             </div>
           </div>
         </div>
+        <div className="row">{this.extractData}</div>
       </div>
     );
   }

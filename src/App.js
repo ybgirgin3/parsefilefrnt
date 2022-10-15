@@ -1,12 +1,12 @@
 import './App.css';
 import React from 'react';
-import FileUpload from './Components/FileUpload';
+import FileUpload from './Components/newFileUpload';
+// import FileUpload from './Components/FileUpload.func';
 
 function App() {
-  const fileUploadForm = <FileUpload />;
   return (
     <div className="App">
-      <div>{fileUploadForm}</div>
+      <FileUpload />
     </div>
   );
 }
