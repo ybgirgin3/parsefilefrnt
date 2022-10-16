@@ -24,7 +24,11 @@ const FileUpload = () => {
     form.append('file', selectedFile);
 
     axios
-      .post(main_url, form)
+      .post(main_url, form, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      })
       .then((res) => {
         console.warn(res.data);
         setIsresp200(true);
@@ -40,7 +44,7 @@ const FileUpload = () => {
         <label
           for="formFile"
           className="form-label inline-block mb-2 text-gray-700">
-          Default file input example
+          ParserFileAPI
         </label>
         <input
           className="form-control
