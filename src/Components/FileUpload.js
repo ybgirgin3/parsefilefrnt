@@ -3,24 +3,28 @@ import DataPreview from './DataPreview';
 import axios from 'axios';
 
 const FileUpload = () => {
-  const [selectedFile, setSelectedFile] = useState();
-  const [postReqRes, setPostReqRes] = useState('');
-  const [isresp200, setIsresp200] = useState(true);
-  const [isFilePicked, setIsFilePicked] = useState(false);
-  const [isFilePosted, setIsFilePosted] = useState(false);
+  const [selectedFile, setSelectedFile] = useState();       // true if file is selected from ui
+  const [postReqRes, setPostReqRes] = useState('');         // define data if post request response is valid
+  const [isresp200, setIsresp200] = useState(true);         // true if post request response is valid
+  const [isFilePicked, setIsFilePicked] = useState(false);  // true if file is picked (for displaying file information)
 
   // url of main file uploading
   let main_url = 'https://parsefileapi.herokuapp.com/uploadfile/';
 
   const changeHandler = (event) => {
+    // get file as attachment if selected
     setSelectedFile(event.target.files[0]);
+
+    // set true if file picked -> use for display file information
+    // before submition
     setIsFilePicked(true);
   };
 
   const handleSubmission = () => {
-    setIsresp200(false);
-    const form = new FormData();
+    setIsresp200(false);                // set response accuracy false 
 
+
+    const form = new FormData();        // create new form data
     form.append('file', selectedFile);
 
     axios
@@ -31,9 +35,8 @@ const FileUpload = () => {
       })
       .then((res) => {
         console.warn(res.data);
-        setIsresp200(true);
-        setPostReqRes(res.data);
-        setIsFilePosted(true);
+        setIsresp200(true);             // set isresp200 to true loading animated button 😅
+        setPostReqRes(res.data);        // set response data to postreq for printing to screen
       })
       .catch((err) => console.warn(err));
   };
@@ -116,13 +119,9 @@ const FileUpload = () => {
       </div>
       <br></br>
       <div className="mb-3 w-96">
-        {isFilePosted ? (
-          <div className="mb-3 w-96">
-            <DataPreview response={postReqRes} />
-          </div>
-        ) : (
-          <div></div>
-        )}
+        <div className="mb-3 w-96">
+          <DataPreview response={postReqRes} />
+        </div>
       </div>
     </div>
   );
