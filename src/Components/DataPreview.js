@@ -2,8 +2,8 @@ import React from 'react';
 
 const DataPreview = ({ response }) => {
   // extract data
-  // const _data = response.data;
-  const information = response.data.information;
+  const _data = response.data;
+  // const information = response.data.information;
   // const raw_content = response.data.raw_content;
   // const _type = response.type;
   // const _size = response.size;
@@ -11,8 +11,10 @@ const DataPreview = ({ response }) => {
   return (
     <div>
       <label>information:</label>
-      <pre>{JSON.stringify(information, null, 10)}</pre>
-    </div>
+      <hr />
+      {/* <pre>{JSON.stringify(information, null, 10)}</pre> */}
+      <code>{JSON.stringify(_data, null, 10)}</code>
+    </div >
   );
 };
 
