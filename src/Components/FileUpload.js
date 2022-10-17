@@ -3,10 +3,19 @@ import DataPreview from './DataPreview';
 import axios from 'axios';
 
 const FileUpload = () => {
-  const [selectedFile, setSelectedFile] = useState();       // true if file is selected from ui
-  const [postReqRes, setPostReqRes] = useState('');         // define data if post request response is valid
-  const [isresp200, setIsresp200] = useState(true);         // true if post request response is valid
-  const [isFilePicked, setIsFilePicked] = useState(false);  // true if file is picked (for displaying file information)
+  const [selectedFile, setSelectedFile] = useState(); // true if file is selected from ui
+  const [postReqRes, setPostReqRes] = useState(''); // define data if post request response is valid
+  const [isresp200, setIsresp200] = useState(true); // true if post request response is valid
+  const [isFilePicked, setIsFilePicked] = useState(false); // true if file is picked (for displaying file information)
+
+  const isSafari =
+    /constructor/i.test(window.HTMLElement) ||
+    (function (p) {
+      return p.toString() === '[object SafariRemoteNotification]';
+    })(
+      !window['safari'] ||
+        (typeof safari !== 'undefined' && window['safari'].pushNotification),
+    );
 
   // url of main file uploading
   let main_url = 'https://parsefileapi.herokuapp.com/uploadfile/';
@@ -21,10 +30,9 @@ const FileUpload = () => {
   };
 
   const handleSubmission = () => {
-    setIsresp200(false);                // set response accuracy false 
+    setIsresp200(false); // set response accuracy false
 
-
-    const form = new FormData();        // create new form data
+    const form = new FormData(); // create new form data
     form.append('file', selectedFile);
 
     axios
@@ -35,8 +43,8 @@ const FileUpload = () => {
       })
       .then((res) => {
         console.warn(res.data);
-        setIsresp200(true);             // set isresp200 to true loading animated button 😅
-        setPostReqRes(res.data);        // set response data to postreq for printing to screen
+        setIsresp200(true); // set isresp200 to true loading animated button 😅
+        setPostReqRes(res.data); // set response data to postreq for printing to screen
       })
       .catch((err) => console.warn(err));
   };
@@ -75,10 +83,14 @@ const FileUpload = () => {
             <p>Filename: {selectedFile.name}</p>
             <p>Filetype: {selectedFile.type}</p>
             <p>Size in bytes: {selectedFile.size}</p>
-            <p>
-              lastModifiedDate:{' '}
-              {selectedFile.lastModifiedDate.toLocaleDateString()}
-            </p>
+            {!isSafari ? (
+              <p>
+                lastModifiedDate:{' '}
+                {selectedFile.lastModifiedDate.toLocaleDateString()}
+              </p>
+            ) : (
+              <p></p>
+            )}
           </div>
         ) : (
           <p></p>
