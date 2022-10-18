@@ -3,26 +3,12 @@ import DataPreview from './DataPreview';
 import { Button, Tabs } from 'antd';
 import HowItWorks from './HowItWorks';
 import axios from 'axios';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 
 const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState(); // true if file is selected from ui
   const [postReqRes, setPostReqRes] = useState(''); // define data if post request response is valid
   const [uploading, setUploading] = useState(false); // true if post request response is valid
-
-  // *  NOTE:
-  //      `last updated` information of file
-  //      do not correctly displaying in safari
-  //      so if browser is safari do not try to extract
-  //      that specific information
-  const isSafari =
-    /constructor/i.test(window.HTMLElement) ||
-    (function (p) {
-      return p.toString() === '[object SafariRemoteNotification]';
-    })(
-      !window['safari'] ||
-        (typeof safari !== 'undefined' && window['safari'].pushNotification),
-    );
 
   // url of main file uploading
   let main_url = 'https://parsefileapi.herokuapp.com/uploadfile/';
