@@ -1,4 +1,5 @@
 import React from 'react';
+import { Empty } from 'antd';
 
 const DataPreview = ({ response }) => {
   // extract data
@@ -10,11 +11,14 @@ const DataPreview = ({ response }) => {
 
   return (
     <div>
-      <label>information:</label>
-      <hr />
-      {/* <pre>{JSON.stringify(information, null, 10)}</pre> */}
-      <code>{JSON.stringify(_data, null, 10)}</code>
-    </div >
+      {_data ? (
+        <code>
+          <pre>{JSON.stringify(_data, null, 4)}</pre>
+        </code>
+      ) : (
+        <Empty />
+      )}
+    </div>
   );
 };
 
