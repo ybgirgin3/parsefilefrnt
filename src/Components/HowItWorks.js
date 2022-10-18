@@ -1,4 +1,6 @@
 import React from 'react';
+import { Layout } from 'antd';
+const { Footer } = Layout;
 
 function HowItWorks() {
   return (
@@ -167,6 +169,13 @@ function HowItWorks() {
         fringilla mi quam ut lectus. Maecenas vitae interdum diam. Ut congue
         orci nec dapibus tincidunt.
       </p>
+
+      <Footer
+        style={{
+          textAlign: 'center',
+        }}>
+        Yusuf Berkay Girgin ©2022 Created With React, Tailwindcss and Ant Design
+      </Footer>
     </div>
   );
 }
