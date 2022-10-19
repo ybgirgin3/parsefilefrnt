@@ -38,9 +38,8 @@ const FileUpload = () => {
   };
 
   return (
-    <Tabs defaultActiveKey="2" centered>
-      <Tabs.TabPane tab="BETA" key="1" disabled />
-      <Tabs.TabPane tab="App" key="2">
+    <Tabs defaultActiveKey="1" centered>
+      <Tabs.TabPane tab="App" key="1">
         <div className="grid h-screen place-items-center ">
           <div className="mb-3 w-96">
             <label
@@ -66,7 +65,7 @@ const FileUpload = () => {
           <DataPreview response={postReqRes} />
         </div>
       </Tabs.TabPane>
-      <Tabs.TabPane tab="How It Works?" key="3">
+      <Tabs.TabPane tab="How It Works?" key="2">
         <HowItWorks />
       </Tabs.TabPane>
     </Tabs>
