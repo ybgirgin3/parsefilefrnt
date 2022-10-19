@@ -25,9 +25,9 @@ const FileUpload = () => {
 
     axios
       .post(main_url, form, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
+        // headers: {
+        //   'Access-Control-Allow-Origin': '*',
+        // },
       })
       .then((res) => {
         console.warn(res.data);
