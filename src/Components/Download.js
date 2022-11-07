@@ -1,16 +1,16 @@
 import React from 'react';
-import FileDownload from 'react-file-download';
+import fileDownload from 'js-file-download';
 import { Button } from 'antd';
 
 function Download({ data }) {
   const handleDownload = () => {
-    FileDownload(data, 'response.json');
+    fileDownload(data, 'response.json');
   };
 
   return (
     <div>
       <Button type="primary" onClick={handleDownload}>
-        Download Data
+        Download
       </Button>
     </div>
   );

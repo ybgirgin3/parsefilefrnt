@@ -57,7 +57,7 @@ const UploadAndParse = () => {
               />
 
               {postReqRes ? (
-                <Download />
+                <Download data={postReqRes} />
               ) : (
                 <Button
                   type="primary"
