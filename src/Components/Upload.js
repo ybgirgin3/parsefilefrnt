@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import DataPreview from './DataPreview';
 import { Button, Tabs } from 'antd';
 import HowItWorks from './HowItWorks';
+import Download from './Download';
 import axios from 'axios';
 import 'antd/dist/antd.min.css';
 
-const FileUpload = () => {
+const UploadAndParse = () => {
   const [selectedFile, setSelectedFile] = useState(); // true if file is selected from ui
   const [postReqRes, setPostReqRes] = useState(''); // define data if post request response is valid
   const [uploading, setUploading] = useState(false); // true if post request response is valid
@@ -54,12 +55,17 @@ const FileUpload = () => {
                 type="file"
                 onChange={changeHandler}
               />
-              <Button
-                type="primary"
-                loading={uploading ? true : false}
-                onClick={handleSubmission}>
-                Parse
-              </Button>
+
+              {postReqRes ? (
+                <Download />
+              ) : (
+                <Button
+                  type="primary"
+                  loading={uploading ? true : false}
+                  onClick={handleSubmission}>
+                  Parse
+                </Button>
+              )}
             </div>
           </div>
           <DataPreview response={postReqRes} />
@@ -68,8 +74,8 @@ const FileUpload = () => {
       <Tabs.TabPane tab="How It Works?" key="2">
         <HowItWorks />
       </Tabs.TabPane>
-    </Tabs>
+    </Tabs >
   );
 };
 
-export default FileUpload;
+export default UploadAndParse;
