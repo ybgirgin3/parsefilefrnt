@@ -1,13 +1,13 @@
 import './App.css';
 import React from 'react';
-import UploadAndParse from './Components/Upload';
 import NavBar from './Components/NavBar';
+import Assembly from './Components';
 
 function App() {
   return (
     <div className="App">
       <NavBar />
-      <UploadAndParse />
+      <Assembly />
     </div>
   );
 }
