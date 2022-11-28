@@ -10,7 +10,8 @@ const Assembly = () => {
   return (
     <Tabs defaultActiveKey="1" centered>
       <Tabs.TabPane tab="App" key="1">
-        <UploadAndParse url={process.env.REACT_APP_HEROKU_URL} />
+        // <UploadAndParse url={process.env.REACT_APP_HEROKU_URL} />
+        <UploadAndParse url="https://parsefileapi.herokuapp.com/uploadfile/" />
       </Tabs.TabPane>
       <Tabs.TabPane tab="How It Works?" key="2">
         <HowItWorks />
