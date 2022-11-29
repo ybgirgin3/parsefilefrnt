@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DataPreview from './DataPreview';
 import Download from './Download';
-import { Button } from 'antd';
+import { Button, Tooltip } from 'antd';
 import axios from 'axios';
 import 'antd/dist/antd.min.css';
 
@@ -22,9 +22,6 @@ const UploadAndParse = ({ url }) => {
 
     axios
       .post(url, form, {
-        // headers: {
-        //   'Access-Control-Allow-Origin': '*',
-        // },
       })
       .then((res) => {
         console.warn(res.data);
@@ -53,12 +50,14 @@ const UploadAndParse = ({ url }) => {
           {postReqRes ? (
             <Download data={JSON.stringify(postReqRes)} />
           ) : (
-            <Button
-              type="primary"
-              loading={uploading ? true : false}
-              onClick={handleSubmission}>
-              Parse
-            </Button>
+            <Tooltip title="This may take a few seconds. Thanks for the patient.." color="blue">
+              <Button
+                type="primary"
+                loading={uploading ? true : false}
+                onClick={handleSubmission}>
+                Parse
+              </Button>
+            </Tooltip>
           )}
         </div>
       </div>
