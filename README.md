@@ -13,6 +13,14 @@ React Frontend for FileParserAPI app
 
 To run:
 
+locally:
+
 ```sh
- ~$ REACT_APP_HEROKU_URL='https://parsefileapi.herokuapp.com/uploadfile/' npm start
+ ~$ REACT_APP_HEROKU_URL='https://parsefileapi.herokuapp.com/uploadfile/' && npm start
 ```
+
+or
+
+netlify:
+
+> https://parsefilefrnt.netlify.app/
