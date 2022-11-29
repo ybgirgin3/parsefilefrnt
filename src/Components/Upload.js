@@ -22,9 +22,6 @@ const UploadAndParse = ({ url }) => {
 
     axios
       .post(url, form, {
-        // headers: {
-        //   'Access-Control-Allow-Origin': '*',
-        // },
       })
       .then((res) => {
         console.warn(res.data);
