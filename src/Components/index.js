@@ -5,8 +5,6 @@ import HowItWorks from './HowItWorks';
 import 'antd/dist/antd.min.css';
 
 const Assembly = () => {
-  // * variables
-
   return (
     <Tabs defaultActiveKey="1" centered>
       <Tabs.TabPane tab="App" key="1">
