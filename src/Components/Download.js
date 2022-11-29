@@ -3,7 +3,7 @@ import fileDownload from 'js-file-download';
 import { DownloadOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
-function Download({ data }) {
+function Download({ data, isDisabled = false }) {
   const handleDownload = () => {
     fileDownload(data, 'response.json');
   };
@@ -11,11 +11,12 @@ function Download({ data }) {
   return (
     <div>
       <Button
-        type="primary"
+        size={'large'}
+        disabled={isDisabled}
+        type="dashed"
         onClick={handleDownload}
-        icon={<DownloadOutlined />}>
-        Download
-      </Button>
+        icon={<DownloadOutlined />}
+        danger></Button>
     </div>
   );
 }
