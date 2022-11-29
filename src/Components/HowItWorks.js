@@ -11,8 +11,13 @@ function HowItWorks() {
       }}>
       <div class="h-screen place-items-center">
         <header>How This App Works ?</header>
-        {/* <div class="grid h-screen place-items-center"> */}
-        <div>EASY! Select File Upload and Let the magic happen 😁</div>
+        <div>
+          EASY! Select File Upload and Let the magic happen 😁
+
+        </div>
+        <div>
+          You can upload: PDF, HTML, JPEG, PNG, TEXT, WORD (experimental), Apple Pages
+        </div>
       </div>
     </div>
   );
