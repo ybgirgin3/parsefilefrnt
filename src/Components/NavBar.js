@@ -7,7 +7,7 @@ function NavBar() {
         BETA
       </div>
       <div class="absolute inset-y-0 right-0 w-30s">
-        <a href="https://github.com/ybgirgin3/parsefilefrntt">
+        <a href="https://github.com/ybgirgin3/parsefilefrnt">
           <img
             decoding="async"
             loading="lazy"
