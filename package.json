@@ -10,6 +10,7 @@
     "axios": "^1.1.2",
     "js-file-download": "^0.4.12",
     "react": "^18.2.0",
+    "react-data-preview": "^1.0.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "tw-elements": "^1.0.0-alpha13",
