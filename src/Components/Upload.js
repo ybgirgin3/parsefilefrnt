@@ -23,9 +23,6 @@ const UploadAndParse = ({ url }) => {
 
     axios
       .post(url, form, {
-        // headers: {
-        //   'Access-Control-Allow-Origin': '*',
-        // },
       })
       .then((res) => {
         console.warn(res.data);
@@ -86,7 +83,10 @@ const UploadAndParse = ({ url }) => {
                         transition
                         ease-in-out
                         m-0
-                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none rounded"
+                        focus:text-gray-700
+                        focus:bg-white
+                        focus:border-blue-600
+                        focus:outline-none"
                 id="file_input"
                 type="file"
                 onChange={changeHandler}
