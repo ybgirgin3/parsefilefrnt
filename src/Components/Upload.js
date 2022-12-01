@@ -41,7 +41,7 @@ const UploadAndParse = ({ url }) => {
             Welcome!! ✨
           </span>
           <span class="font-semibold mr-2 text-left flex-auto text-black">
-            if you experience an issue please let me know in the
+            if you experience an issue please let me know in the {""}
             <a
               class="text-blue-600"
               href="https://github.com/ybgirgin3/parsefilefrnt/issues">
