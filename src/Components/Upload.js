@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import DataPreview from './DataPreview';
 import Download from './Download';
 import { Button, Space } from 'antd';
+import { CloudUploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import 'antd/dist/antd.min.css';
 import 'tw-elements';
@@ -41,7 +42,7 @@ const UploadAndParse = ({ url }) => {
             Welcome!! ✨
           </span>
           <span class="font-semibold mr-2 text-left flex-auto text-black">
-            if you experience an issue please let me know in the {""}
+            if you experience an issue please let me know in the {''}
             <a
               class="text-blue-600"
               href="https://github.com/ybgirgin3/parsefilefrnt/issues">
@@ -91,21 +92,24 @@ const UploadAndParse = ({ url }) => {
                 onChange={changeHandler}
               />
             </Space>
-            <Space wrap>
-              <Button
-                size={'large'}
-                type="primary"
-                loading={uploading ? true : false}
-                onClick={handleSubmission}>
-                Process
-              </Button>
+            {selectedFile ? (
+              <Space wrap>
+                <Button
+                  size={'large'}
+                  type="primary"
+                  loading={uploading ? true : false}
+                  icon={<CloudUploadOutlined />}
+                  onClick={handleSubmission}></Button>
 
-              {postReqRes ? (
-                <Download data={JSON.stringify(postReqRes)} />
-              ) : (
-                <Download isDisabled />
-              )}
-            </Space>
+                {postReqRes ? (
+                  <Download data={JSON.stringify(postReqRes)} />
+                ) : (
+                  <Download isDisabled />
+                )}
+              </Space>
+            ) : (
+              <></>
+            )}
           </Space>
         </div>
       </div>
