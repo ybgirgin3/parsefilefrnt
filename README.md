@@ -1,4 +1,6 @@
-React Frontend for FileParserAPI app
+<img src="public/log-svgrepo-com.svg" style="width: 100px"/>
+
+# React Frontend for FileParserAPI app
 
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c8db857c-a0d7-4c2b-a45d-72491a4760fa/deploy-status)](https://app.netlify.com/sites/parsefilefrnt/deploys)

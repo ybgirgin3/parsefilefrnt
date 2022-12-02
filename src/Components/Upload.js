@@ -22,8 +22,7 @@ const UploadAndParse = ({ url }) => {
     form.append('file', selectedFile);
 
     axios
-      .post(url, form, {
-      })
+      .post(url, form, {})
       .then((res) => {
         console.warn(res.data);
         setPostReqRes(res.data); // set response data to postreq for printing to screen
@@ -39,10 +38,10 @@ const UploadAndParse = ({ url }) => {
           class="p-2 bg-gray-200 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex"
           role="alert">
           <span class="flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3">
-            Welcome!!
+            Welcome!! ✨
           </span>
           <span class="font-semibold mr-2 text-left flex-auto text-black">
-            if you experience an issue please let me know in the{' '}
+            if you experience an issue please let me know in the {""}
             <a
               class="text-blue-600"
               href="https://github.com/ybgirgin3/parsefilefrnt/issues">
@@ -102,7 +101,7 @@ const UploadAndParse = ({ url }) => {
               </Button>
 
               {postReqRes ? (
-                <Download data={postReqRes} />
+                <Download data={JSON.stringify(postReqRes)} />
               ) : (
                 <Download isDisabled />
               )}
@@ -112,7 +111,7 @@ const UploadAndParse = ({ url }) => {
       </div>
 
       {/* if response is good then print the output */}
-      <div class="grid h-screen place-items-center">
+      <div class="grid h-screen">
         <DataPreview response={postReqRes} />
       </div>
     </div>
