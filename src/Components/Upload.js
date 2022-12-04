@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DataPreview from './DataPreview';
 import Download from './Download';
-import { Button, Space } from 'antd';
+import { Button, Space, Alert} from 'antd';
 import axios from 'axios';
 import 'antd/dist/antd.min.css';
 import 'tw-elements';
@@ -10,6 +10,7 @@ const UploadAndParse = ({ url }) => {
   const [selectedFile, setSelectedFile] = useState(); // true if file is selected from ui
   const [postReqRes, setPostReqRes] = useState(''); // define data if post request response is valid
   const [uploading, setUploading] = useState(false); // true if post request response is valid
+  const [backendResponseStatus, setBackendResponseStatus] = useState(200);
 
   const changeHandler = (event) => {
     // get file as attachment if selected
@@ -27,13 +28,24 @@ const UploadAndParse = ({ url }) => {
         console.warn(res.data);
         setPostReqRes(res.data); // set response data to postreq for printing to screen
       })
-      .catch((err) => console.warn(err))
+      .catch((err) => {
+        setBackendResponseStatus(err.status);
+        console.warn(err)
+      })
       .finally(() => setUploading(false));
   };
 
   return (
     <div className="grid h-screen place-items-center w-400">
       <div class="bg-white-900 text-center py-4 lg:px-4">
+        {backendResponseStatus !== 200 && (
+            <Alert
+              message="Error"
+              description="Looks like something wrong. Please contact to your provider: https://github.com/ybgirgin3/parsefilefrnt/issues"
+              type="error"
+              showIcon
+            />
+        )}
         <div
           class="p-2 bg-gray-200 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex"
           role="alert">
