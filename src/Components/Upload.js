@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import DataPreview from './DataPreview';
 import Download from './Download';
-import { Button, Space, Alert} from 'antd';
+import { Button, Space, Alert } from 'antd';
+import { CloudUploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import 'antd/dist/antd.min.css';
 import 'tw-elements';
@@ -30,7 +31,7 @@ const UploadAndParse = ({ url }) => {
       })
       .catch((err) => {
         setBackendResponseStatus(err.status);
-        console.warn(err)
+        console.warn(err);
       })
       .finally(() => setUploading(false));
   };
@@ -39,12 +40,12 @@ const UploadAndParse = ({ url }) => {
     <div className="grid h-screen place-items-center w-400">
       <div class="bg-white-900 text-center py-4 lg:px-4">
         {backendResponseStatus !== 200 && (
-            <Alert
-              message="Error"
-              description="Looks like something wrong. Please contact to your provider: https://github.com/ybgirgin3/parsefilefrnt/issues"
-              type="error"
-              showIcon
-            />
+          <Alert
+            message="Error"
+            description="Looks like something wrong. Please contact to your provider: https://github.com/ybgirgin3/parsefilefrnt/issues"
+            type="error"
+            showIcon
+          />
         )}
         <div
           class="p-2 bg-gray-200 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex"
@@ -53,7 +54,7 @@ const UploadAndParse = ({ url }) => {
             Welcome!! ✨
           </span>
           <span class="font-semibold mr-2 text-left flex-auto text-black">
-            if you experience an issue please let me know in the
+            if you experience an issue please let me know in the {''}
             <a
               class="text-blue-600"
               href="https://github.com/ybgirgin3/parsefilefrnt/issues">
@@ -103,21 +104,24 @@ const UploadAndParse = ({ url }) => {
                 onChange={changeHandler}
               />
             </Space>
-            <Space wrap>
-              <Button
-                size={'large'}
-                type="primary"
-                loading={uploading ? true : false}
-                onClick={handleSubmission}>
-                Process
-              </Button>
+            {selectedFile ? (
+              <Space wrap>
+                <Button
+                  size={'large'}
+                  type="primary"
+                  loading={uploading ? true : false}
+                  icon={<CloudUploadOutlined />}
+                  onClick={handleSubmission}></Button>
 
-              {postReqRes ? (
-                <Download data={JSON.stringify(postReqRes)} />
-              ) : (
-                <Download isDisabled />
-              )}
-            </Space>
+                {postReqRes ? (
+                  <Download data={JSON.stringify(postReqRes)} />
+                ) : (
+                  <Download isDisabled />
+                )}
+              </Space>
+            ) : (
+              <></>
+            )}
           </Space>
         </div>
       </div>
